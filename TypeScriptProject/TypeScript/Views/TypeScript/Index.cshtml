@@ -1,0 +1,901 @@
+﻿<!DOCTYPE html>
+<head>
+    @{
+        Layout = "_Layout";
+    }
+
+</head>
+<body>
+   
+   <section margin-top="30px"  id="type"></section>
+    <br />
+    <br />
+    <br />
+    <br />
+    
+    <div class = "text">
+        <h2>Базовые типы</h2>        
+        <h3>Булевый (boolean)</h3>
+        <p>Тип данных для значений истина/ложь:</p>
+        <pre class = "code"><b>let</b> isDone: boolean = false;</pre>
+    </div>
+    
+    <div class = "text">
+        <h3>Числовой (number)</h3>
+        <p>Все числа представлены значениями с плавающей точкой. Используются шестнадцатеричные, десятичные, двоичные и восьмеричные значения. Числам присваивается тип <font face="Menlo, Monaco, Consolas, "Courier New">number</font>:
+    </div>    
+    <div class = "code">
+        <pre><b>let</b> decimal: number = 6;
+        <b>let</b> hex: number = 0xf00d;
+        <b>let</b> binary: number = 0b1010;
+        <b>let</b> octal: number = 0o744;</pre>
+    </div>    
+    <div class = "text">
+        <h3>Строковый (string)</h3>
+        <p>Строковый тип <font face="Menlo, Monaco, Consolas, "Courier New">string</font> используется для работы с текстовыми данными. TypeScript использует двойные (&quot;) или одинарные (&rsquo;) кавычки для обозначения данных строкового типа:</p>
+    </div>
+    <div class = "code">
+        <pre><b>let</b> color: string = &quot;blue&quot;;
+        color = &rsquo;red&rsquo;;</pre>
+    </div>
+    <div class = "text">
+        <p>Помимо этого можно использовать <i>шаблоны строк</i>. Такие шаблоны могут состоять из множества строк текста, а также включать в себя выражения. Шаблоны выделяются с двух сторон знаком обратного ударения (`), а выражения встриваются как ${ expr }:</p>
+    </div>
+    <div class = "code">
+        <pre><b>let</b> fullName: string = `Bob Bobbington`;
+        <b>let</b> age: number = 37;
+        <b>let</b> sentence: string = `Hello, my name is ${ fullName }.
+        I&rsquo;ll be ${ age + 1 } years old next month.`;</pre>
+    </div>
+    <div class = "text">
+        <p>Такая запись эквивалентна следующей:</p>
+    </div>
+    <div class = "code">
+        <pre><b>let</b> sentence: string = &quot;Hello, my name is &quot; + fullName + &quot;.\n\n&quot; +
+            &quot;I&rsquo;ll be &quot; + (age + 1) + &quot; years old next month.&quot;;</pre>
+    </div>    
+    <div class = "text">
+        <h3>Массив (array)</h3>
+        <p>TypeScript позволяет работать с массивами значений. Массивы записываются двумя разными способами. Первый – запись типа элементов с последующими квадратными скобками []:</p>
+    </div>
+    <div class = "code">
+        <pre><b>let</b> list: number[] = [1, 2, 3];</pre>
+    </div>
+    <div class = "text">
+        <p>Другой способ использует обобщенный тип Array&lt;elemType&gt;:</p>
+    </div>
+    <div class = "code">
+        <pre><b>let</b> list: Array&lt;number&gt; = [1, 2, 3];</pre>
+    </div>    
+    <div class = "text">
+        <h3>Кортеж (tuple)</h3>
+        <p>Кортежи позволяют представлять массивы, в которых типы фиксированного числа элементов известны и различны. Например, можно представить значение как пару строки (<font face="Menlo, Monaco, Consolas, "Courier New">string</font>) и числа (<font face="Menlo, Monaco, Consolas, "Courier New">number</font>):</p>
+    </div>
+    <div class="code">
+        <pre>///Объявляем переменную типа кортеж
+        <b>let</b> x: [string, number];
+        ///Инициализация
+        x = ["hello", 10]; //Всё верно
+        ///Инициализируем неверно
+        x = [10, "hello"]; //Ошибка</pre>
+    </div>
+    <div class = "text">
+        <p>При обращении к элементу по индексу возвращается элемент соответствующего типа</p>
+    </div>    
+    <div class="code">
+        <pre>console.log(x[0].substr(1)); // OK
+        console.log(x[1].substr(1)); // Ошибка, &rsquo;number&rsquo; не содержит &rsquo;substr&rsquo;</pre>
+    </div>    
+    <div class = "text">
+        <h3>Enum</h3>
+        <p>Полезным дополнением стандартного набора типов данных из JavaScript является <font face="Menlo, Monaco, Consolas, "Courier New">enum</font>. В языках вроде C# enum – способ задания более понятных имен набору значений:</p>
+    </div>    
+    <div class="code">
+        <pre><b>enum</b> Color {Red, Green, Blue}
+        <b>let</b> c: Color = Color.Green;</pre>
+    </div>
+    <div class = "text">
+        <p>По умолчанию enum нумеруют элементы, начиная с 0 индекса. Это можно изменить вручную:</p>
+    </div>    
+    <div class="code">
+        <pre><b>enum</b> Color {Red = 1, Green, Blue}
+        <b>let</b> c: Color = Color.Green;</pre>
+    </div>
+    <div class = "text">
+        <p>Альтернативно можно присвоить значения каждому элементу вручную:</p>
+    </div>    
+    <div class="code">
+        <pre><b>enum</b> Color {Red = 1, Green = 2, Blue =4}
+        <b>let</b> c: Color = Color.Green;</pre>
+    </div>
+    <div class = "text">
+        <p>Одна из полезных возможностей enum заключается в том, что можно определить значение по заданному номеру:</p>
+    </div>    
+    <div class = "code">
+        <pre><b>enum</b> Color {Red = 1, Green, Blue}
+        <b>let</b> colorName: string = Color[2];
+        alert(colorName) //отображает &rsquo;Green&rsquo; поскольку это значение присвоено элементу с индексом 2</pre>
+    </div>    
+    <div class = "text">
+        <h3>Any</h3>
+        <p>Бывает полезно иметь возможность объявить переменные заранее не известного типа. Для этого используется тип <font face="Menlo, Monaco, Consolas, "Courier New">any</font>:</p>
+    </div>
+    <div class = "code">
+        <pre><b>let</b> notSure: any = 4;
+        notSure = &quot;maybe a string instead&quot;;          
+        notSure = false;//Да, пусть будет булевый тип</pre>
+    </div>
+    <div class = "text">
+        <p>Тип <font face="Menlo, Monaco, Consolas, "Courier New">any</font> позволяет работать с уже существующим кодом на JavaScript, давая возможность манипулировать проверкой типов во время компиляции. Схожий тип <font face="Menlo, Monaco, Consolas, "Courier New">Object</font> играет схожую роль как и в других языках. Но <font face="Menlo, Monaco, Consolas, "Courier New">Object</font> не позволяет вызывать методы к переменным этого типа, только задавать значения:</p>
+    </div>
+    <div class = "code">
+            <pre><b>let</b> notSure: any = 4;</pre>
+            notSure.ifItExists(); // Нет ошибки, ifItExists может существовать при запуске
+            notSure.toFixed(); // Нет ошибки, toFixed существует (компилятор не проверяет)
+            <br />
+            <b>let</b> prettySure: Object = 4;
+            <pre>prettySure.toFixed(); // Ошибка: Свойство &rsquo;toFixed&rsquo; не существует для типа &rsquo;Object&rsquo;.</pre>
+    </div>
+    <div class = "text">
+        <p>Тип <font face="Menlo, Monaco, Consolas, "Courier New">any</font> также полезен, если известна часть типов. Например, для массива значений разных типов:</p>
+    </div>    
+    <div class = "code">
+        <pre><b>let</b> list: any[] = [1, true, &quot;free&quot;];
+        list[1] = 100;</pre>
+    </div>    
+    <div class = "text">
+        <h3>Void</h3>
+        <p><font face="Menlo, Monaco, Consolas, "Courier New">void</font> – противоположность <font face="Menlo, Monaco, Consolas, "Courier New">any</font>: отсутствие какого-либо типа. Часто используется как тип возвращаемого значения функций: </p>
+    </div>    
+    <div class = "code">
+        <pre>function warnUser(): <b>void</b> {
+           alert(&quot;This is my warning message&quot;);
+        }</pre>
+    </div>
+    <div class = "text">
+        <p>Переменные типа <font face="Menlo, Monaco, Consolas, "Courier New">void</font> не несут пользы, поскольку им можно присвоить только значения <font face="Menlo, Monaco, Consolas, "Courier New">undefined</font> или <font face="Menlo, Monaco, Consolas, "Courier New">null</font>:</p>
+    </div>    
+    <div class = "code">
+        <pre><b>let</b> unusable: void = undefined</pre>
+    </div>    
+    <div class = "text">
+        <h3>Null и Undefined</h3>
+        <p>В TypeScript <font face="Menlo, Monaco, Consolas, "Courier New">undefined</font> и <font face="Menlo, Monaco, Consolas, "Courier New">null</font> имеют собственные типы данных. Как и <font face="Menlo, Monaco, Consolas, "Courier New">void</font> они не очень полезны сами по себе:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+            // Этим переменным других значений не задать
+            <b>let</b> u: undefined = undefined;
+            <b>let</b> n: null = null;</pre>
+    </div>
+    <div class = "text">
+        <p>По умолчанию <font face="Menlo, Monaco, Consolas, "Courier New">null</font> и <font face="Menlo, Monaco, Consolas, "Courier New">undefined</font> являються подтипами остальных типов. Это значит, что можно присвоить значения <font face="Menlo, Monaco, Consolas, "Courier New">null</font> и <font face="Menlo, Monaco, Consolas, "Courier New">undefined</font> типам вроде <font face="Menlo, Monaco, Consolas, "Courier New">number</font>.</p>
+        <p>Однако, при использовании флага <font face="Menlo, Monaco, Consolas, "Courier New">--strictNullChecks null</font> и <font face="Menlo, Monaco, Consolas, "Courier New"> undefined</font> разрешается присваивать только типу <font face="Menlo, Monaco, Consolas, "Courier New">void</font>, а также соответствующим типам этих значений. Такой флаг помогает избежать множества ошибок. </p>
+    </div> 
+    <div class = "text">
+        <h3>Never</h3>
+        <p>Тип <font face="Menlo, Monaco, Consolas, "Courier New">never</font> представляет собой тип данных, которые никогда не возникают. Например, <font face="Menlo, Monaco, Consolas, "Courier New">never</font> – это тип значения, возвращаемого функцией, которая ввызывает исключение, или которая никогда не заканчивается.</p>
+        <p>Тип <font face="Menlo, Monaco, Consolas, "Courier New">never</font> является подтипом любого другого типа, а также может быть присвоен к переменной любого типа. Однако, никакой тип (даже <font face="Menlo, Monaco, Consolas, "Courier New">any</font>) не может быть присвоен типу <font face="Menlo, Monaco, Consolas, "Courier New">never</font>:</p>
+    </div>    
+    <div class = "code">
+        <pre>// Функция, возвращающая never, должна иметь недостижимую точку окончания
+        <b>function error</b>(message: string): <b>never</b> {
+              <b>throw new</b> Error(message);
+        }
+        <br />  
+        <b>function infiniteLoop</b>( )<b>: never</b> {
+             <b>while </b>(true) {
+             }
+        }
+</pre>
+    </div>    
+    <div class = "text">
+        <h3>Утверждение типа (type assertion)</h3>
+        <p>Утверждение типа – способ сказать компилятору &quot;Я знаю, что делаю&quot;. Схоже с приведением типа в других языках, но не выполняет дополнительных проверок, поэтому не влияет на время запуска. TypeScript предполагает, что все необходимые проверки были выполнены программистом.</p>
+        <p>Утверждение типа выполняется двумя эквивалентными способами. Первый – синтаксис &quot;угловых скобок&quot;</p>
+    </div>    
+    <div class = "code">
+        <pre>
+            <b>let</b> someValue: any = &quot;this is a string&quot;;
+            <b>let</b> strLength: number = (&lt;<b>string</b>&gt;someValue).length;</pre>        
+    </div>
+    <div class = "text">
+        <p>Другой способ – использование <font face="Menlo, Monaco, Consolas, "Courier New">as</font> синтаксиса:</p>
+    </div>
+    <div class = "code">
+        <pre>
+            <b>let</b> someValue: any = &quot;this is a string&quot;;
+            <b>let</b> strLength: number = (someValue as string).length;</pre>
+    </div>    
+    <div class = "text">
+        <h3>Комплексные объекты</h3>
+        <p>Помимо простых переменных можно создавать сложные объекты. Например:</p>
+    </div>
+    <div class = "code">
+        <pre>
+            <b>let</b> person = {name:&quot;Tom&quot;, age:23};
+            console.log(person.name);
+            //альтернативное обращение к свойству
+            console.log(person[&quot;name&quot;])</pre>       
+    </div>
+    
+
+    <section id="class"></section>
+    <br />
+    <br />
+    <br />    
+    <br />
+    <div class = "text">
+        <h2>Классы</h2>
+        <h3>Введение</h3>
+        <p>TypeScript полностью реализует объектно-ориентированный подход. Для примера реализуем класс <font face="Menlo, Monaco, Consolas, "Courier New">User</font> с двумя свойствами <font face="Menlo, Monaco, Consolas, "Courier New">id</font> и <font face="Menlo, Monaco, Consolas, "Courier New">name</font> и функцией <font face="Menlo, Monaco, Consolas, "Courier New">getInfo()</font>:</p>
+    </div>    
+    <div class = "code">
+        <pre>class User {
+             id: number;
+             name: string;
+             getInfo(): string {
+                 return &quot;id:&quot; + this.id + &quot; name:&quot; + this.name;
+             }
+        }
+    </pre>
+    </div>
+    <div class = "text">
+        <p>Создадим объекты этого класса:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+    <b>let</b> tom: User = new User();
+    tom.id = 1;
+    tom.name = &quot;Tom&quot;;
+    console.log(tom.getInfo());
+    <br />
+
+    <b>let</b> alice: User = new User();
+    alice.id = 2;
+    alice.name = &quot;Alice&quot;;
+    console.log(alice.getInfo());
+</pre>
+    </div>
+    <div class = "text">
+        <p>Для начальной инициализации объектов используется конструктор (ключевое слово <b>constructor</b>):</p>
+    </div>    
+    <div class = "code">
+    <pre>
+    <b>class</b> User {
+            id: number;
+            name: string;
+            constructor(userId: number, userName: string) {      
+                this.id = userId;
+                this.name = userName;
+            }
+            getInfo(): string {
+                return "id:" + this.id + " name:" + this.name;
+            }
+    }
+    <b>let</b> tom: User = new User(1, &quot;Tom&quot;);
+    console.log(tom.getInfo());
+    tom.id = 4;
+    <br/>
+    <b>let</b> alice: User = new User(1, &quot;Alice&quot;);
+    console.log(alice.getInfo());
+    </pre>
+    </div>
+    <div class = "text">
+        <p>Можно задать несколько версий конструктора:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+        <b>class</b> User {
+        <br/>
+             id: number;
+             name: string;
+             constructor(userId: number, userName: string);
+             constructor(userId: string, userName: string);
+             constructor(userId: any, userName: string) {
+        <br/>
+                 this.id = userId;
+                 this.name = userName;
+             }
+             getInfo(): string {
+                 return &quot;id:&quot; + this.id + &quot; name:&quot; + this.name;
+             }
+        }
+        <br/>
+        <b>let</b> tom: User = new User(1, &quot;Tom&quot);
+        console.log(tom.getInfo());
+        tom = new User(&quot;4&quot;, &quot;Tom&quot;);
+        console.log(tom.getInfo());
+    </pre>
+    </div>
+    <div class = "text">
+        <p>Кроме обычных функций и свойств можно задать статические. Для определения используется ключевое слово <b>static</b>:</p>
+    </div>    
+    <div class = "code">
+        <pre><b>class</b> Operation {
+                 static PI: number = 3.14;
+                 static getSquare(radius: number): number {
+                     return Operation.PI * radius * radius;
+                 }
+            }
+            <b>let</b> result = Operation.getSquare(30);
+            console.log(&quot;Площадь круга с радиусом 30 равна &quot; + result);
+            <b>let</b> result2 = Operation.PI * 30 * 30;
+            console.log(result2)
+    </pre>
+    </div>    
+    <div class = "text">
+        <h3>Наследование</h3>
+        <p>Наследование в TypeScript реализуется с помощью ключевого слова <b>extends</b>:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+        <b>class</b> Animal {
+             name: string;
+             <b>constructor</b>(theName: string) { this.name = theName; }
+             move(distanceInMeters: number = 0) {
+                 console.log(`${this.name} moved ${distanceInMeters}m.`);
+             }
+        }
+
+        <b>class</b> Snake extends Animal {
+             <b>constructor</b>(name: string) { <b>super</b>(name); }
+             move(distanceInMeters = 5) {
+                 console.log("Slithering...");
+                 super.move(distanceInMeters);
+             }
+        }
+
+        <b>class</b> Horse extends Animal {
+             <b>constructor</b>(name: string) { <b>super</b>(name); }
+             move(distanceInMeters = 45) {
+                 console.log("Galloping...");
+                 <b>super</b>.move(distanceInMeters);
+             }
+        }
+
+        <b>let</b> sam = new Snake("Sammy the Snake");
+        <b>let</b> tom: Animal = new Horse("Tommy the Horse");
+
+        sam.move()
+        tom.move(34)
+    </pre>
+    </div>
+    <div class = "text">
+        <p>В примере выше продемонстрировано множество возможностей наследования в TypeScript. Для объявления подкласса используется ключевое слово <font face="Menlo, Monaco, Consolas, "Courier New">extends</font>. В примере классы <font face="Menlo, Monaco, Consolas, "Courier New">Horse</font> и <font face="Menlo, Monaco, Consolas, "Courier New">Snake</font> являются подклассами класса <font face="Menlo, Monaco, Consolas, "Courier New">Animal</font>.</p>
+        <p>Подкласс, содержащий свой конструктор, должен вызывать функцию <font face="Menlo, Monaco, Consolas, "Courier New">super()</font>, которая вызовет конструктор базового класса. </p>
+        <p>В примере также показано переопределение методов базового класса в подклассе. Для каждого подкласса задан собственный метод <font face="Menlo, Monaco, Consolas, "Courier New">move</font>, комбинирующий функционал базового класса с уникальным для каждого подкласса. Важно, что хотя <font face="Menlo, Monaco, Consolas, "Courier New">tom</font> объявлен как <font face="Menlo, Monaco, Consolas, "Courier New">Animal</font>, его значение – объект класса <font face="Menlo, Monaco, Consolas, "Courier New">Horse</font>, поэтому при вызове <font face="Menlo, Monaco, Consolas, "Courier New">tom.move(34)</font>, будет выполнен метод из класса <font face="Menlo, Monaco, Consolas, "Courier New">Horse</font>.</p>
+    </div>    
+    <div class = "text">
+        <h3>Модификаторы доступа</h3>
+        <p>В TypeScript используются три модификатора доступа: <font face="Menlo, Monaco, Consolas, "Courier New"><b>public</b></font>, <font face="Menlo, Monaco, Consolas, "Courier New"><b>private</b></font> и <font face="Menlo, Monaco, Consolas, "Courier New"><b>protected</b></font>. По умолчанию TypeScript использует модификатор <font face="Menlo, Monaco, Consolas, "Courier New">public</font>, поэтому в примере выше обращение к методам и свойствам классов осуществлялось без проблем.</p>
+        <h4>private</h4>
+        <p>Модификатор <font face="Menlo, Monaco, Consolas, "Courier New">private</font> запрещает доступ к объектам класса извне самого класса. К примеру:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+       class Animal {
+             <b>private</b> name: string;
+             constructor(theName: string) { this.name = theName; }
+        }
+        new Animal(&quot;Cat&quot;).name; //Ошибка &rsquo;name&rsaquo; is private;
+    </pre>
+    </div>
+    <div class = "text">
+        <b>Интересная особенность <font face="Menlo, Monaco, Consolas, "Courier New">private</font> заключается в присвоении значений. Рассмотрим следующий пример:</b>
+    </div>    
+    <div class = "code">
+        <pre>
+        class Animal {
+             <b>private</b> name: string;
+             constructor(theName: string) { this.name = theName; }
+        }
+
+        class Rhino extends Animal {
+             constructor() { super("Rhino"); }
+        }
+        class Employee {
+             <b>private</b> name: string;
+             constructor(theName: string) { this.name = theName; }
+        }
+
+        let animal = new Animal(&quot;Goat&quot;);
+        let rhino = new Rhino();
+        let employee = new Employee(&quot;Bob&quot;)
+
+        animal = rhino;
+        animal = employee; //Ошибка: &rsaquo;Animal&rsaquo; и &rsquo;Employee&rsquo; не сопоставимы
+    </pre>
+</div>
+    <div class = "text">
+        <p>В примере выше объявлены классы <font face="Menlo, Monaco, Consolas, "Courier New">Animal</font> и <font face="Menlo, Monaco, Consolas, "Courier New">Rhino</font>, причем <font face="Menlo, Monaco, Consolas, "Courier New">Rhino</font> является подклассом <font face="Menlo, Monaco, Consolas, "Courier New">Animal</font>. Также объявлен класс <font face="Menlo, Monaco, Consolas, "Courier New">Employee</font>, котрый выглядит идентичным классу <font face="Menlo, Monaco, Consolas, "Courier New">Animal</font>. Создаются объекты этих классов, после осуществляется попытка присвоить объекты друг другу. Посколько <font face="Menlo, Monaco, Consolas, "Courier New">Animal</font> и <font face="Menlo, Monaco, Consolas, "Courier New">Rhino</font> разделяют <font face="Menlo, Monaco, Consolas, "Courier New">private</font> часть объявления, присвоение осуществляется без проблем. Однако, несмотря на то, что объявление <font face="Menlo, Monaco, Consolas, "Courier New">Employee</font> также содержит <font face="Menlo, Monaco, Consolas, "Courier New">private</font> свойство <font face="Menlo, Monaco, Consolas, "Courier New">name</font>, результатом попытки присвоения является ошибка несоответствия типов.</p>
+        <h4>protected</h4>
+        <p>Модификатор <font face="Menlo, Monaco, Consolas, "Courier New">protected</font> похож на <font face="Menlo, Monaco, Consolas, "Courier New">private</font>, однако разрешает доступ к свойствам и функциям подклассам, наследующим от этого класса:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+        class Person {
+             <b>protected </b> name: string;
+             constructor(name: string) { this.name = name; }
+        }
+        
+        class Employee extends Person {
+             private department: string;
+        
+             constructor(name: string, department: string) {
+                 super(name);
+                 this.department = department;
+             }
+        public getElevatorPitch() {
+                 return Hello, my name is ${this.name} and I work in ${this.department}.`;
+             }
+        }
+        <br/>
+        let howard = new Employee(&quot;Howard&quot;, &quot;Sales&quot;);
+        console.log(howard.getElevatorPitch());
+        console.log(howard.name); // ошибка
+</pre>
+    </div>
+    <div class = "text">
+        <p>В примере выше при попытке обратиться к свойству <font face="Menlo, Monaco, Consolas, "Courier New">name</font> извне класса возникает ошибка, однако обращение через метод срабатывает, поскольку класс <font face="Menlo, Monaco, Consolas, "Courier New">Employee</font> наследует от <font face="Menlo, Monaco, Consolas, "Courier New">Person</font>.</p>
+        <p><font face="Menlo, Monaco, Consolas, "Courier New">Protected</font> могут быть и конструкторы классов:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+        class Peson {
+             protected name: string;
+             protected constructor(theName: string) { this.name = theName; }
+        }
+
+        class Employee extends Person {
+             private department: string;
+
+             constructor(name: string, department: string) {
+                 super(name);
+                 this.department = department;
+             }
+
+        let howard = new Employee(&quot;Howard&quot;, &quot;Sales&quot;);
+        let john = new Person(&quot;John&quot;); // Ошибка: Конструктор класса &rsquo;Person&rsquo; protected
+    </pre>
+</div>
+    <div class = "text">
+        <p>В этом случае разрешено создавать объекты подкласса, но запрещено создавать объекты базового класса.</p>
+        <h3>Модификатор readonly</h3>
+        <p>Свойства можно сделать доступными только для чтения, используя модификатор <font face="Menlo, Monaco, Consolas, "Courier New">readonly</font>:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+        class Octopus {
+             readonly name: string;
+             readonly numberOfLegs: number = 8;
+             constructor (theName: string) {
+                 this.name = theName;
+             }
+        }        
+
+        let rob = new Octopus(&quot;Robert&quot;)
+        rob.name = &quot;Bobert&quot;//Ошибка: name is readonly  
+    </pre>   
+    </div>
+    <div class = "text">
+        <p><font face="Menlo, Monaco, Consolas, "Courier New">readonly может модифицировать параметры:</font></p>
+    </div>    
+    <div class = "code">
+        <pre>
+        class Octopus {
+             readonly numberOfLegs: number = 8;
+                 constructor(readonly name: string) {
+                 }
+            }</pre>
+    </div>
+    <div class = "text">
+        <p>Такое определение класса <font face="Menlo, Monaco, Consolas, "Courier New">Octopus</font> сильно укоротило запись.</p>
+        <h3>Методы доступа (accessors)</h3>
+        <p>Для доступа к свойствам определяются пары методов: <font face="Menlo, Monaco, Consolas, "Courier New">get</font> и <font face="Menlo, Monaco, Consolas, "Courier New">set</font> – для получения и установки значения соответственно:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+        class Employee {
+                 private _fullName: string; 
+
+                 get fullName(): string {
+                     return this._fullName;
+                 }
+
+                 set fullName(newName: string) {
+                     this._fullName = newName;
+                 }
+            }            
+
+            let employee = new Employee();
+            employee.fullName = &quot;Bob Smith&quot; //Срабатывает set-метод
+            console.log(employee.fullName);//Срабатывает get-метод
+    </pre>
+    </div>
+    <div class = "text">
+        <h3>Статические свойства</h3>
+        <p>Ключевое слово <b>static</b> позволяет задавать статические свойства класса – доступные при обращении к классу непосредственно, без необходимости инициализировать объект:</p>
+    </div>    
+    <div class = "code">
+        <pre>
+        class Grid {
+             <b>static</b> origin = {x: 0, y: 0};
+             calculateDistanceFromOrigin(point: {x: number; y: number;}) {
+                 let xDist = (point.x - Grid.origin.x);
+                 let yDist = (point.y - Grid.origin.y);
+                 return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+             }
+             constructor (public scale: number) { }
+        }        
+
+        let grid1 = new Grid(1.0);  // 1x scale
+        console.log(grid1.calculateDistanceFromOrigin({x: 10, y: 10}));
+        </pre>    
+    </div>    
+
+
+    <section id="interface"></section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class = "text">
+        <h2>Интерфейсы</h2>
+        <p>Интерфейс определяет свойства и методы, которые объект должен реализовать. В TypeScript интерфейсы похожи на те, что используются в языках Java и C#. Для определения интерфейса используется ключевое слово <b>interface</b>:</p>
+    </div>
+    <div class = "code">
+        <pre>
+        <b>interface</b> IUser {
+                 id: number;
+                 name: string;
+            }
+</pre>
+    </div>
+    <div class = "text">
+        <p>Интерфейс <font face="Menlo, Monaco, Consolas, "Courier New">IUser</font> определяет два свойства: <font face="Menlo, Monaco, Consolas, "Courier New">id</font> типа <font face="Menlo, Monaco, Consolas, "Courier New">number</font> и <font face="Menlo, Monaco, Consolas, "Courier New">name</font> типа <font face="Menlo, Monaco, Consolas, "Courier New">string</font>. Используем его в программе:</p>
+    </div>
+    <div class = "code">
+        <pre>
+        let employee: IUser = {
+             id: 1,
+             name: &quot;Tom&quot;
+        }
+        console.log("id: " + employee.id);
+        console.log("name: " + employee.name);
+        </pre>
+    </div>
+    <div class = "text">
+        <p>В данном случае <font face="Menlo, Monaco, Consolas, "Courier New">employee</font> реализует интерфейс <font face="Menlo, Monaco, Consolas, "Courier New">IUser</font>. <font face="Menlo, Monaco, Consolas, "Courier New">Employee</font> должен реализовать все свойства и методы интерфейса <font face="Menlo, Monaco, Consolas, "Courier New">IUser</font>, поэтому при определении необходимо указать значения для каждого свойства.</p>
+        <p>Параметры методов и возвращаемые значения могут представлять интерфейсы: </p>
+    </div>
+    <div class = "code">
+    <pre>
+        function getEmployeeInfo(user: IUser): void {
+
+                console.log(&quot;id: &quot; + user.id);
+                console.log(&quot;name: &quot; + user.name)
+        }
+
+        function buildUser(userId: number, userName: string): IUser {
+
+                return { id: userId, name: userName };
+        }</pre>
+    </div>
+    <div class = "text">
+        <p>При обпределении интерфейса можно задать необязательные свойства с помощью знака вопроса <b>?</b>:</p>
+    </div>
+    <div class = "code">
+        <pre>interface IUser {
+             id: number;
+             name: string;
+             age?: number;
+        }</pre>
+    </div>
+    <div class = "text">
+        <h3>Интерфейсы функций</h3>
+        <p>Интерфейсы могут определять функцию. В таком случае реализующий объект обязан описать функцию с тем же набором параметров и тем же типом результата:</p>
+    </div>
+    <div class = "code">
+        <pre>
+        interface IUser {
+             id: number;
+             name: string;
+             getFullName(surname: string): string;
+        }
+
+        let employee: IUser = {
+             id: 1, 
+             name: "Alice",
+             getFullName : function (surname: string): string {
+                 return this.name + &quot; &quot; + surname;
+             }
+        }
+
+        let fullName = employee.getFullName("Tompson");
+        console.log(fullName); // Alice Tompson
+</pre>
+    </div>
+    <div class = "text">
+        <h3>Интерфейсы массивов</h3>
+        <p>Интерфейсы могут определять массивы:</p>
+    </div>
+    <div class = "code">
+        <pre>
+        interface StringArray {
+             [index: number]: string;
+        }
+
+        let phones: StringArray;
+        phones = ["iPhone 7", "HTC 10", "Samsung 8"];
+
+        let myPhone: string = phones[0];
+        console.log(myPhone);
+    </pre>
+    </div>
+    <div class = "text">
+        <p>Хотя в примере для индексации используются числа, разрешено использовать также и тип <font face="Menlo, Monaco, Consolas, "Courier New">string</font>.</p>
+        <h3>Функциональный тип</h3>
+        <p>Интерфейсы позволяют задавать функциональный тип данных. Это схоже с объявлением функции, но включает в себя только объявление входных параметров и типа результата.</p>
+        <p>Для функционального типа названия аргументов не обязательно должны совпадать с заданными в интерфейсе.</p>
+    </div>
+    <div class = "code">
+        <pre>
+        interface SearchFunc {
+             (source: string, subString: string): boolean;
+        }
+
+        let mySearch: SearchFunc;
+        mySearch = function(src: string, sub: string) {
+             let result = src.search(sub);
+             return result > -1;
+        }</pre>
+    </div>    
+    <div class = "text">
+        <h3>Реализация интерфейса</h3>
+        <p>Наиболее распространено использования интерфейсов для задания требований к описанию классов. Для реализации интерфейса используется ключевое словов <b>implements</b>:</p>
+    </div>
+    <div class = "code">
+        <pre>
+        interface ClockInterface {
+             currentTime: Date;
+             setTime(d: Date);
+        }
+
+        class Clock <b>implements</b> ClockInterface {
+             currentTime: Date;
+             setTime(d: Date) {        
+                 this.currentTime = d;
+             }
+             constructor(h: number, m: number) { }
+        }</pre>
+    </div>
+    <div class = "text">
+        <p>Интерфейс используется для описания <font face="Menlo, Monaco, Consolas, "Courier New">public</font> части класса. </p>
+        <h3>Наследование интерфейсов</h3>
+        <p>Подобно классам, интерфейсы могут быть наследованы от других при использовании ключвого слова <b>extends</b>. Возможно и наследование от нескольких интерфейсов:</p>
+    </div>
+    <div class = "code">
+        <pre>
+        interface Shape {
+             color: string;
+        }
+
+        interface Pen {
+             penWidth: number;
+        }
+
+        interface Square extends Shape, PenStroke {
+             sideLength: number;
+        }
+
+        let square = <Square>{};
+        square.color = "blue";
+        square.sideLength = 10;
+        square.penWidth = 5.0;
+    </pre>
+    </div>
+    <div class = "text">
+        <h3>Гибридные интерфейсы</h3>
+        <p>Интерфейсы позволяют задавать объекты, работающие как кобинации описанных выше типов. Пример объекта, сочетающего свойства функции и объекта с дополнительными свойствами:</p>
+    </div>
+    <div class = "code">
+        <pre>
+        interface Counter {
+             (start: number): string;
+             interval: number;
+             reset(): void;
+        }
+
+        function getCounter(): Counter {
+             let counter = <Counter>function (start: number) { };
+             counter.interval = 123;
+             counter.reset = function () { };
+             return counter;
+        }
+
+        let c = getCounter();
+        c(10);
+        c.reset();
+        c.interval = 5.0;
+    </pre>
+    </div>
+    <div class = "text">
+        <h3>Наследование интерфейсов от классов</h3>
+        <p>При наследовании интерфейса от класса интерфейс получает все члены класса, но не их реализацию. Интерфейсы наследуют даже <font face="Menlo, Monaco, Consolas, "Courier New">private</font> и <font face="Menlo, Monaco, Consolas, "Courier New">protected</font> члены базового класса. Это означает, что при создании интерфейса, который наследуюется от класса с <font face="Menlo, Monaco, Consolas, "Courier New">private</font> или <font face="Menlo, Monaco, Consolas, "Courier New">protected</font> членами, интерфейс может быть реализован только его подклассами. Это может быть полезно при наличии большой иерархии наследования и желании указать на то, что код работает только с подклассами, обладающими определнными свойствами:</p>
+    </div>
+    <div class = "code">
+        <pre>class Control {
+             private state: any;
+        }
+
+        interface SelectableControl extends Control {
+             select(): void;
+        }
+
+        class Button extends Control implements SelectableControl {
+             select() { }
+        }
+
+        //Ошибка: свойство &rsquo;state&rsquo; отсутствует в типе &rsquo;Image&rsquo;.
+        class Image implements SelectableControl {
+             select() { }
+        }</pre>
+    </div>
+    <div class = "text">
+        <p>В примере выше <font face="Menlo, Monaco, Consolas, "Courier New">SelectableControl</font> содержит все поля класса <font face="Menlo, Monaco, Consolas, "Courier New">Control</font>, включая <font face="Menlo, Monaco, Consolas, "Courier New">private</font> свойство <font face="Menlo, Monaco, Consolas, "Courier New">state</font>. Поскольку свойство <font face="Menlo, Monaco, Consolas, "Courier New">private</font>, реализовать интерфейс <font face="Menlo, Monaco, Consolas, "Courier New">SelectableControl</font> могут только наследники класса <font face="Menlo, Monaco, Consolas, "Courier New">Control</font>.</p>
+    </div>
+    <section id="generic"></section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="text">
+        <h2>Обобщения (generics)</h2>
+        <p>Обобщения полезны, когда необходимо описать одну функцию для нескольких различных типов передаваемых в нее параметров. Простейшая обобщенная функция задается следующим образом:</p>
+    </div>
+    <div class="code">
+        <pre>
+        function identity<T>(arg: T): T {
+             return arg;
+        }
+
+        let result = identity&lt;number&gt;(5);
+        console.log(result);</pre>
+    </div>
+    <div class="text">
+        <p>Тип переменной задается как <font face="Menlo, Monaco, Consolas, "Courier New">T</font>. Это позволяет определить переданный тип аргумента и использовать его в дальнейшем. Этот же тип используется в качестве результата выоплнения функции.</p>
+        <p>В примере выше используется один из двух путей вызова такой функции – прямое задание параметров и их типов. Другой способ – дать компилятору самостоятельно определить тип параметра:</p>
+    </div>
+    <div class="code">
+        <pre>let result = identity(5);</pre>
+    </div>
+    <div class="text">      
+        <p>Работа с массивами осуществляется схожим образом:</p>
+    </div>
+    <div class="code">  
+        <pre>
+        function loggingIdentity<T>(arg: Array<T>): Array<T> {
+             console.log(arg.length);  // Попытка вызова функции для простого аргумента вернет ошибку
+             return arg;
+        }</pre>
+    </div>    
+    <div class="text">
+        <h3>Обобщенные классы и интерфейсы</h3>
+        <p>Обобщенные классы задаются схожим образом:</p>
+    </div>
+    <div class="code">
+        <pre>
+        class User<T> {
+             private _id: T;
+             constructor(id:T) {
+                 this._id = id;
+             }
+             getId(): T {
+                 return this._id;
+             }
+        }
+
+        let tom = new User<number>(3);        
+        console.log(tom.getId());
+        let alice = new User<string>("vsf");
+        console.log(alice.getId());
+        </pre>
+    </div>
+    <div class="text">
+        <p>Важно отметить, что после создания объекта с параметрами одного типа, второе создание этого же объекта с параметрами другого типа работать не будет:</p>
+    </div>
+    <div class="code">
+        <pre>let tom = new User<number>(3);
+        tom = new User<string>("vsf"); // Ошибка</pre>
+    </div>
+    <div class="text">
+        <p>К интерфейсам применяются все те же правила:</p>
+    </div>
+    <div class="code">
+        <pre>
+        interface IUser<T> {
+             getId(): T;
+        }
+
+        class User<T> implements IUser<T> {
+             private _id: T;
+             constructor(id:T) {
+                 this._id = id;
+             }
+             getId(): T {
+                 return this._id;
+             }
+        }
+        </pre>
+    </div>
+    <div class="text">
+        <h3>Ограничения</h3>
+        <p>Бывает полезно ограничить обобщенную функцию до нескольких определенных типов параметров. Предположим, нужно объявить обобщенную функцию для всех типов данных со свойством <font face="Menlo, Monaco, Consolas, "Courier New">length</font>:</p>
+    </div>
+    <div class="code">
+        <pre>
+        interface Lengthwise {
+               length: number;
+        }
+
+        function loggingIdentity&lt;T extends Lengthwise&gt;(arg: T): T {
+             console.log(arg.length);
+             return arg;
+        }
+        </pre>
+    </div>
+    <div class="text">
+        <p>Такая функция будет работать только для тех типов данных, которые содержат свойство <font face="Menlo, Monaco, Consolas, "Courier New">length</font>:</p>
+    </div>
+    <div class="code">
+        <pre>loggingIdentity(3); //ошибка
+        loggingIdentity({length: 10, value: 3}); //вручную задали свойство – нет ошибки</pre>
+    </div>
+    
+    <section id="module"></section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="text">
+        <h2>Модули</h2>
+        <p>TypeScript поддерживает работу с модулями.</p> 
+        <h3>Экспорт</h3>
+        <p>Чтобы классы, интерфейсы и функции были видны извне, нужно добавить ключевое слово <font face="Menlo, Monaco, Consolas, "Courier New"><b>export</b></font> к определению:</p>        
+    </div>
+    <div class="code">
+        <pre>
+        export interface Device {
+             model: string;
+        }
+
+        export class Superphone implements Device {
+             model: string;
+        }
+
+        export class Tablet implements Device  {
+             model: string;
+        }</pre>
+    </div>
+    <div class="text">
+        <p>Или по-другому:</p>
+    </div>
+    <div class="code">
+        <pre>export {Device, Tablet, Smartphone as Phone};</pre>
+    </div>
+    <div class="text">
+        <h3>Импорт</h3>
+        <p>Чтобы задействовать модуль в приложении, его нужно импортировать оператором <font face="Menlo, Monaco, Consolas, "Courier New"><b>import</b></font>:</p>
+    </div>
+    <div class="code">
+        <pre>
+        import {Smartphone as Superphone} from "./mobiles";
+        let eyephone: Superphone = new Superphone();
+        eyephone.model = "eyephone Pro";
+
+        //Или для импорта модуля целиком
+        import * as mobiles from "./lib/mobiles";
+        let eyephone: mobiles.Device = new mobiles.Superphone();</pre>
+    </div>
+</body>

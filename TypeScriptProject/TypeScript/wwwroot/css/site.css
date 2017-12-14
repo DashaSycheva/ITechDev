@@ -1,0 +1,91 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 10px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size:15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+.p {
+   font-family: "wf_segoe-ui_normal", Verdana, Geneva, Tahoma, sans-serif;
+   font-size: 11px;
+}
+.code {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 14px;
+    color: #333;
+    display: block;
+    line-height: 3;
+    padding: 0px;
+    padding-bottom: 0px;
+    margin: 0 0 10px;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    text-align: justify;
+    letter-spacing: 2px;
+
+}
+
+.size{
+    font-size:14px;
+}
+.navbar-inverse {
+    background-color: #294e80;
+    border-color: #294e80;
+    margin-bottom:10px;
+    padding-bottom:10px;
+}
+.navbar {
+    background: #294e80 !important;
+    background-color: #294e80 !important;
+}
+    {
+    background-color: #294e80 !important;
+}
+.fontstyle{
+    font-size:10px;
+}
+.licat {
+    padding: 15px 13px;
+}
+.licat:hover {
+    background: white;
+    color: black;
+}
+.licat:hover a {
+        color:black;
+    }
+.text {
+    line-height: 30px;
+    font-family: "wf_segoe-ui_normal", Verdana, Geneva, Tahoma, sans-serif;
+    text-align: justify;
+}
